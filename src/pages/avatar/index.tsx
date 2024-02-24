@@ -14,8 +14,11 @@ const AvatarPage = (props: { pusher_key: string; pusher_cluster: string }) => {
 
 	const listenerMessage = (data: { message: string | undefined }) => {
 		const synth = speechSynthesis;
+        console.log(synth)
 		const u = new SpeechSynthesisUtterance(data.message);
+        console.log(u)
 		u.voice = synth.getVoices()[1];
+        console.log(u.voice)
 		u.addEventListener('end', () => {
 			setPlaying(false);
 		});
