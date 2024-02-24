@@ -5,14 +5,14 @@ import Pusher from 'pusher-js';
 import { GetServerSideProps } from 'next';
 import { useState } from 'react';
 
-const AvatarPage = (props) => {
+const AvatarPage = (props: { pusher_key: string; pusher_cluster: string }) => {
 	const [playing, setPlaying] = useState(false);
 
 	const avatar = playing
 		? 'https://media1.tenor.com/m/Fi3CWqJrT5YAAAAC/sousou-no-frieren-frieren-beyond-journeys-end.gif'
 		: 'https://i.imgur.com/TnBhkgG.gif';
 
-	const listenerMessage = (data) => {
+	const listenerMessage = (data: { message: string | undefined }) => {
 		const synth = speechSynthesis;
 		const u = new SpeechSynthesisUtterance(data.message);
 		u.voice = synth.getVoices()[1];

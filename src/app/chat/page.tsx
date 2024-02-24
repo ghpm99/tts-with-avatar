@@ -13,7 +13,7 @@ export default function ChatPage() {
 		setMessages('');
 	};
 
-	const submitOnEnter = (event) => {
+	const submitOnEnter = (event: any) => {
 		if (event.key === 'Enter') {
 			sendMessage();
 			event.preventDefault();
@@ -25,8 +25,8 @@ export default function ChatPage() {
 			<textarea
 				id='chat'
 				name='chat'
-				rows='4'
-				cols='50'
+				rows={4}
+				cols={50}
                 style={{color: 'black'}}
 				value={messages}
 				onChange={(value) => setMessages(value.target.value)}
