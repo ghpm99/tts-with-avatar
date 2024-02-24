@@ -17,9 +17,13 @@ const AvatarPage = (props: { pusher_key: string; pusher_cluster: string }) => {
         console.log(synth)
 		const u = new SpeechSynthesisUtterance(data.message);
         console.log(u)
-        if(synth.getVoices()[1]){
-            u.voice = synth.getVoices()[1];
-        }
+		const thalitaVoice = synth.getVoices().filter((voice) => voice.name === 'Microsoft Thalita Online(Natural)')[0];
+        if(thalitaVoice){
+            u.voice = thalitaVoice;
+        }else{
+			u.voice = synth.getVoices()[1];
+		}
+		console.log(synth.getVoices())
         console.log(u.voice)
 		u.addEventListener('end', () => {
 			setPlaying(false);
