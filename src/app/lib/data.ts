@@ -1,19 +1,16 @@
-'use server';
-const Pusher = require('pusher');
+import PusherServer from 'pusher';
 
-const pusher = new Pusher({
-	appId: process.env.app_id,
-	key: process.env.key,
-	secret: process.env.secret,
-	cluster: process.env.cluster,
-	useTLS: true,
-});
+let pusherInstance: PusherServer | null = null
 
-
-
-export const sendChatMessage = async (message: string) => {
-    pusher.trigger('chat', 'message', {
-        message: message,
-    });
-
+export const getPusherInstance = () => {
+    if(!pusherInstance){
+        pusherInstance = new PusherServer({
+            appId: process.env.app_id ?? '',
+            key: process.env.key ?? '',
+            secret: process.env.secret ?? '',
+            cluster: process.env.cluster?? '',
+            useTLS: true,
+        })
+    }
+    return pusherInstance;
 }

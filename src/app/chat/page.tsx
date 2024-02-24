@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react'
-import { sendChatMessage } from '../lib/data'
 
 
 export default function ChatPage() {
@@ -9,7 +8,13 @@ export default function ChatPage() {
 
 	const sendMessage = () => {
 		console.log(messages);
-		sendChatMessage(messages)
+		fetch('/api/chat/', {
+			method: 'POST',
+			body: JSON.stringify({ message: messages }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
 		setMessages('');
 	};
 
